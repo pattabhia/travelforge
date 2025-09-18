@@ -1,0 +1,68 @@
+openapi: 3.0.1
+info:
+  title: Hotel Booking API
+  version: 1.0.0
+  description: APIs for booking a hotel room
+paths:
+  /bookHotelRoom:
+    post:
+      summary: Book a hotel room
+      description: Book with checkInDate, roomType, guestName, and numberofNights
+      operationId: bookHotelRoom
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                checkInDate:
+                  type: string
+                  format: date
+                  description: Date of room check-in (YYYY-MM-DD)
+                guestName:
+                  type: string
+                  description: Name of the guest
+                roomType:
+                  type: string
+                  description: Room type
+                  enum: [Garden View, Sea View]
+                numberofNights:
+                  type: integer
+                  minimum: 1
+                  description: Planned stay length
+              required: [guestName, checkInDate, roomType, numberofNights]
+      responses:
+        "200":
+          description: Booking confirmed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  returnBookingID:
+                    type: string
+                    description: Booking confirmation ID
+        "400":
+          description: Bad request (missing/invalid fields)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }
+        "404":
+          description: Insufficient availability or missing dates
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date: { type: string }
+                        available: { type: integer }

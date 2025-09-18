@@ -1,0 +1,64 @@
+openapi: 3.0.1
+info:
+  title: Hotel Room Inventory API
+  version: 1.0.0
+  description: API for checking hotel room inventory
+paths:
+  /getRoomInventory/{date}:
+    get:
+      summary: Get overall hotel room inventory summary
+      description: Returns summary of all room types and their availability
+      operationId: getInventorySummary
+      parameters:
+        - name: date
+          in: path
+          required: true
+          description: Date of booking (YYYY-MM-DD)
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: Room inventory details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  date:
+                    type: string
+                    format: date
+                    description: Date queried
+                  gardenViewInventory:
+                    type: integer
+                    description: Garden view inventory
+                  seaViewInventory:
+                    type: integer
+                    description: Sea view inventory
+                  summary:
+                    type: object
+                    properties:
+                      totalAvailable:
+                        type: integer
+                        nullable: true
+                        description: Sum of available rooms when counts are numeric
+        "400":
+          description: Invalid or missing date
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "404":
+          description: No availability found for the requested date
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  date:
+                    type: string
