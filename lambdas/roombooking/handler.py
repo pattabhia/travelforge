@@ -158,4 +158,4 @@ def lambda_handler(event, _context):
         "numberofNights": nights,
         "roomType": roomType,
         "reservedDates": stay_dates,
-    })
+    }) 

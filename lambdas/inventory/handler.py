@@ -80,4 +80,4 @@ def lambda_handler(event, _context):
         "seaViewInventory": sv,
         "summary": {"totalAvailable": gv + sv if isinstance(gv, int) and isinstance(sv, int) else None},
     }
-    return _agent_resp(event, 200, body)
+    return _agent_resp(event, 200, body) 

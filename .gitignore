@@ -100,7 +100,7 @@ ipython_config.py
 #   commonly ignored for libraries.
 #   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
 #poetry.lock
-
+ 
 # pdm
 #   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
 #pdm.lock
@@ -115,10 +115,10 @@ __pypackages__/
 # Celery stuff
 celerybeat-schedule
 celerybeat.pid
-
+.vscode
 # SageMath parsed files
 *.sage.py
-
+.vscode
 # Environments
 .env
 .venv
@@ -160,3 +160,5 @@ cython_debug/
 #.idea/
 
 logging.yaml
+.vscode/settings.json
+/.vscode
